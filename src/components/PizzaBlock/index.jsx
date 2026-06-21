@@ -46,3 +46,5 @@ const PizzaBlock = ({ imageUrl, title, price, sizes, types }) => {
 }
 
 export default PizzaBlock
+
+
