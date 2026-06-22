@@ -1,13 +1,15 @@
-@use '../variables' as *;
-@use '../libs/normalize' as *;
+@use "../variables" as *;
+@use "../libs/normalize" as *;
 
 .pizza-block {
   width: 280px;
   text-align: center;
   margin-bottom: 65px;
 
-  &:not(:nth-of-type(4n)) {
-    margin-right: 35px;
+  &-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__image {
