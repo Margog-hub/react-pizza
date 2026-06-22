@@ -1,5 +1,5 @@
-@use '../variables' as *;
-@use '../libs/normalize' as *;
+@use "../variables" as *;
+@use "../libs/normalize" as *;
 
 .header {
   border-bottom: 1px solid $gray-line;
@@ -9,6 +9,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 750px) {
+      flex-direction: column;
+
+      .header__cart {
+        margin-bottom: 20px;
+      }
+    }
   }
 
   &__logo {
@@ -28,6 +36,7 @@
 
     p {
       color: #7b7b7b;
+      margin-bottom: 10px;
     }
   }
 }
