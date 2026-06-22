@@ -22,11 +22,12 @@ body {
 }
 
 .content {
-  padding: 40px 0;
+  padding: 10px 0;
+  margin: 0 50px;
 
   &__title {
     margin: 35px 0;
-    font-size: 38px;
+    font-size: 60px;
     margin-top: 60px;
     margin-bottom: 60px;
   }
@@ -158,6 +159,10 @@ body {
         stroke: color.adjust(#b6b6b6, $lightness: -50%);
       }
     }
+  }
+
+  .content__items {
+    display: block;
   }
 
   &__item {
