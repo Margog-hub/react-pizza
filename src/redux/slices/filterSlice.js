@@ -1,36 +1,49 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  categoryId : 0,
+  searchValue: "",
+  categoryId: 0,
   currentPage: 1,
   sort: {
-    name: 'популярністю',
-    sortProperty: 'rating'
-  }
-}
+    name: "популярністю",
+    sortProperty: "rating",
+  },
+};
 
 export const filterSlice = createSlice({
-  name: 'filters',
+  name: "filters",
   initialState,
   reducers: {
-   setCategoryId : (state, action) => {
-      state.categoryId = action.payload
+    setCategoryId: (state, action) => {
+      state.categoryId = action.payload;
     },
-    setSort: (state, action)=> {
-      state.sort = action.payload
+    setSearchValue: (state, action) => {
+      state.searchValue = action.payload;
     },
-     setCurrentPage: (state, action)=> {
-      state.currentPage = action.payload
+    setSort: (state, action) => {
+      state.sort = action.payload;
     },
-     setFilters: (state, action)=> {
-      state.currentPage = Number(action.payload.currentPage)
-      state.sort = action.payload.sort
-      state.categoryId = Number(action.payload.categoryId)
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
+    setFilters: (state, action) => {
+      state.currentPage = Number(action.payload.currentPage);
+      state.sort = action.payload.sort;
+      state.categoryId = Number(action.payload.categoryId);
+      state.searchValue = action.payload.searchValue || "";
     },
   },
-})
+});
 
+export const selectFilter = (state) => state.filter;
+export const selectSort = (state) => state.filter.sort;
 
-export const { setCategoryId, setSort, setCurrentPage, setFilters } = filterSlice.actions
+export const {
+  setCategoryId,
+  setSearchValue,
+  setSort,
+  setCurrentPage,
+  setFilters,
+} = filterSlice.actions;
 
-export default filterSlice.reducer
+export default filterSlice.reducer;

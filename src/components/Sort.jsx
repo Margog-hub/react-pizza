@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSort } from "../redux/slices/filterSlice";
+import { selectSort, setSort } from "../redux/slices/filterSlice";
 import { lists } from "../assets/lists";
 
 const Sort = () => {
   const dispatch = useDispatch()
-  const sort = useSelector(state => state.filter.sort)
-  const sortRef =useRef()
+  const sort = useSelector(selectSort)
+  const sortRef = useRef()
 
   const [open, setOpen] = useState(false)
 
@@ -16,18 +16,18 @@ const Sort = () => {
   }
 
 
-useEffect(() => {
-  const handleOutsideClick = (e) => {
-    const path = e.composedPath ? e.composedPath() : [];
-    if (sortRef.current && !path.includes(sortRef.current)) {
-      setOpen(false);
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      const path = e.composedPath ? e.composedPath() : [];
+      if (sortRef.current && !path.includes(sortRef.current)) {
+        setOpen(false);
+      }
     }
-  }
-  document.body.addEventListener('click', handleOutsideClick);
-  return () => {
-    document.body.removeEventListener('click', handleOutsideClick);
-  };
-}, []);
+    document.body.addEventListener('click', handleOutsideClick);
+    return () => {
+      document.body.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
 
 
   return (
