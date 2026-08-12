@@ -1,7 +1,7 @@
 import qs from 'qs'
 import { useCallback, useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Categories from "../components/Categories"
 import PizzaBlock from "../components/PizzaBlock"
 import Skeleton from "../components/PizzaBlock/Skeleton"
@@ -29,30 +29,30 @@ const Home = () => {
   };
 
   const getPizzas = useCallback(async () => {
-  const currentSort = sort?.sortProperty || 'rating';
-  const order = currentSort.includes('-') ? 'asc' : 'desc';
-  const sortBy = currentSort.replace('-', '');
-  const category = categoryId > 0 ? `category=${categoryId}` : '';
-  const search = searchValue ? `search=${searchValue}` : '';
+    const currentSort = sort?.sortProperty || 'rating';
+    const order = currentSort.includes('-') ? 'asc' : 'desc';
+    const sortBy = currentSort.replace('-', '');
+    const category = categoryId > 0 ? `category=${categoryId}` : '';
+    const search = searchValue ? `search=${searchValue}` : '';
 
-  dispatch(
-    fetchPizzas({
-      order,
-      sortBy,
-      category,
-      search,
-      currentPage,
-    })
-  );
-  window.scrollTo(0, 0);
-}, [categoryId, sort, searchValue, currentPage, dispatch]);
+    dispatch(
+      fetchPizzas({
+        order,
+        sortBy,
+        category,
+        search,
+        currentPage,
+      })
+    );
+    window.scrollTo(0, 0);
+  }, [categoryId, sort, searchValue, currentPage, dispatch]);
 
   // Парсинг параметров при первой загрузке
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
       const sortObj = lists.find(list => list.sortProperty === params.sortProperty) || lists[0];
-      
+
       dispatch(setFilters({
         ...params,
         sort: sortObj,
@@ -64,9 +64,9 @@ const Home = () => {
   }, [dispatch]);
 
   // Запрос данных при изменении фильтро Передаем getPizzas в массив зависимостей
-useEffect(() => {
-  getPizzas();
-}, [getPizzas]);
+  useEffect(() => {
+    getPizzas();
+  }, [getPizzas]);
 
   // Синхронизация с URL
   useEffect(() => {
@@ -82,7 +82,11 @@ useEffect(() => {
     isMounted.current = true;
   }, [categoryId, sort, searchValue, currentPage, navigate]);
 
-  const pizzas = items.map((obj) => (<PizzaBlock key={obj.id} {...obj} />));
+  const pizzas = items.map((obj) => (
+    <Link key={obj.id}  to={`/pizza/${obj.id}`}>
+      <PizzaBlock {...obj} />
+    </Link>
+  ));
   const skeletons = [...new Array(12)].map((_, index) => <Skeleton key={index} />);
 
   return (
