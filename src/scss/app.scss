@@ -384,3 +384,58 @@ body {
     }
   }
 }
+
+.pizza-card {
+  max-width: 450px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #e2e0e0;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover { 
+    transform: translateY(-8px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+  }
+
+  .pizza-image {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  .pizza-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2d3436;
+    margin: 10px 0 15px 0;
+    letter-spacing: 0.5px;
+  }
+
+  .pizza-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e17055;
+    margin: 10px 0 5px 0;
+    padding: 10px 20px;
+    background: #fdf0ed;
+    border-radius: 10px;
+    display: inline-block;
+  }
+}
+
+.loading {
+  text-align: center;
+  font-size: 20px;
+  color: #636e72;
+  padding: 50px;
+}
