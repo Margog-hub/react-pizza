@@ -1,15 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CartItem, CartSliceState } from "./type";
+import { getCartFromLS } from "../../utils/getCartFromLS";
+import { calcTotalPrice } from "../../utils/calcTotalPrice";
 
-const initialState = {
-  items: [],
-  totalPrice: 0,
-};
+
+const initialState:  CartSliceState = getCartFromLS()
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addItem: (state, action) => {
+    addItem: (state, action: PayloadAction<CartItem>) => {
       const findItem = state.items.find(
         (item) => item.id === action.payload.id,
       );
@@ -21,19 +22,17 @@ export const cartSlice = createSlice({
           count: 1,
         });
       }
-      state.totalPrice = state.items.reduce((sum, item) => {
-        return sum + item.price * item.count;
-      }, 0);
+      state.totalPrice = calcTotalPrice(state.items)
     },
 
-    plusItem: (state, action) => {
+    plusItem: (state, action: PayloadAction<string>) => {
       const findItem = state.items.find((item) => item.id === action.payload);
       if (findItem) {
         findItem.count++;
       }
     },
 
-    minusItem: (state, action) => {
+    minusItem: (state, action: PayloadAction<string>) => {
       const findItem = state.items.find((item) => item.id === action.payload);
       if (findItem) {
         if (findItem.count > 1) {
@@ -46,7 +45,7 @@ export const cartSlice = createSlice({
       }
     },
 
-    removeItem: (state, action) => {
+    removeItem: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((items) => items.id !== action.payload);
     },
 
@@ -57,9 +56,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const selectCart = (state) => state.cart;
-export const selectCartItemById = (id) => (state) =>
-  state.cart.items.find((item) => item.id === id);
+
 
 export const { addItem, removeItem, clearItems, plusItem, minusItem } =
   cartSlice.actions;

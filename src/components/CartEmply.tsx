@@ -1,9 +1,9 @@
+import  { FC } from "react"
 import { Link } from "react-router-dom"
 import cartNoProducts from '../assets/img/cartNoProducts.png'
 
-const CartEmply = () => {
+const CartEmply: FC = () => {
   return (
-    <>
       <div className="cart cart--empty">
         <h2>Кошик пустий  <span>😕</span></h2>
         <p>
@@ -15,7 +15,6 @@ const CartEmply = () => {
           <span>Повернутися назад</span>
         </Link>
       </div>
-    </>
   )
 }
 

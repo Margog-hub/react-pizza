@@ -1,11 +1,16 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 
 
-const FullPazza = () => {
-  const [pizza, setPizza] = useState(null)
+const FullPazza: FC = () => {
+  const [pizza, setPizza] = useState<{
+    imageUrl : string;
+    title: string;
+    price: number;
+  }>()
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -15,7 +20,7 @@ const FullPazza = () => {
         const { data } = await axios.get(`https://68750ca8dd06792b9c967d62.mockapi.io/item/${id}`)
         setPizza(data)
       } catch (err) {
-        alert("Помилка при отриманні піци", err)
+        alert("Помилка при отриманні піци")
         navigate('/')
       }
     }

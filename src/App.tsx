@@ -1,5 +1,6 @@
-import { Routes, Route } from "react-router-dom";
+// @ts-ignore
 import './scss/app.scss';
+import { Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
