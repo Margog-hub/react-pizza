@@ -2,14 +2,12 @@ import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-
-
 const FullPazza: FC = () => {
   const [pizza, setPizza] = useState<{
-    imageUrl : string;
+    imageUrl: string;
     title: string;
     price: number;
-  }>()
+  }>();
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -17,30 +15,28 @@ const FullPazza: FC = () => {
   useEffect(() => {
     async function fetchPizza() {
       try {
-        const { data } = await axios.get(`https://68750ca8dd06792b9c967d62.mockapi.io/item/${id}`)
-        setPizza(data)
+        const { data } = await axios.get(
+          `https://68750ca8dd06792b9c967d62.mockapi.io/item/${id}`,
+        );
+        setPizza(data);
       } catch (err) {
-        alert("Помилка при отриманні піци")
-        navigate('/')
+        alert("Помилка при отриманні піци");
+        navigate("/");
       }
     }
-    fetchPizza()
-  }, [])
+    fetchPizza();
+  }, []);
 
   if (!pizza) {
     return <div className="loading">Загрузка піци....</div>;
   }
   return (
     <div className="pizza-card">
-      <img
-        src={pizza.imageUrl}
-        alt={pizza.title}
-        className="pizza-image"
-      />
+      <img src={pizza.imageUrl} alt={pizza.title} className="pizza-image" />
       <h2 className="pizza-title">{pizza.title}</h2>
       <h4 className="pizza-price">{pizza.price} грн.</h4>
     </div>
-  )
-}
+  );
+};
 
-export default FullPazza
+export default FullPazza;

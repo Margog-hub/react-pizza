@@ -1,10 +1,8 @@
-import {  createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { Pizza, PizzaSliceState, Status } from "./type";
 import { fetchPizzas } from "./asyncActions";
 
-
- 
 const initialState: PizzaSliceState = {
   items: [],
   status: Status.LOADING, // 'loading' | 'success' | 'error'
@@ -26,7 +24,7 @@ export const pizzaSlice = createSlice({
       })
       .addCase(fetchPizzas.fulfilled, (state, action) => {
         state.items = action.payload;
-        state.status =Status.SUCCESS;
+        state.status = Status.SUCCESS;
       })
       .addCase(fetchPizzas.rejected, (state) => {
         state.items = [];

@@ -7,7 +7,7 @@ import PizzaBlock from "../components/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Sort from "../components/Sort";
 import Pagination from "../components/Pagination";
-import { selectFilter} from "../redux/filter/selectors";
+import { selectFilter } from "../redux/filter/selectors";
 import { fetchPizzas } from "../redux/pizza/asyncActions";
 import { selectPizzaData } from "../redux/pizza/selectors";
 import { useAppDispatch } from "../redux/store";
@@ -24,7 +24,7 @@ const Home: FC = () => {
 
   const onClickСategory = useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  },[])
+  }, []);
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
   };
@@ -85,22 +85,20 @@ const Home: FC = () => {
     getPizzas();
   }, [getPizzas]);
 
-  const pizzas = items.map((obj) => (
-  <PizzaBlock  key={obj.id} {...obj} />
-));
+  const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
 
   const skeletons = [...new Array(12)].map((_, index) => (
     <Skeleton key={index} />
   ));
 
   return (
-     <>
+    <>
       <div className="content__top">
-         <Categories
+        <Categories
           categoryId={categoryId}
           onClickСategoryId={onClickСategory}
         />
-        <Sort sort={sort}/>
+        <Sort sort={sort} />
       </div>
       <h2 className="content__title">Всі піци</h2>
 
@@ -116,8 +114,8 @@ const Home: FC = () => {
           {status === "loading" ? skeletons : pizzas}
         </div>
       )}
-     <Pagination currentPage={currentPage} onChangePage={onChangePage} />
-      </>
+      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+    </>
   );
 };
 
